@@ -16,7 +16,7 @@
    - name: Apply new ACL to R1
      ios_config:
        # Replace 'Eth0/0' with the correct interface name
-       parents: interface Eth0/0.20
+       parents: interface Eth0/0.10
        lines:
          - ip access-group REQ3 in
   
