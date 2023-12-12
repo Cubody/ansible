@@ -1,9 +1,9 @@
 ---
-- name: Configure standard ACL
+- name: Configure extended ACL
   hosts: R1
   gather_facts: false
   connection: network_cli
- 
+
   tasks:
    - name: Load new ACL into device
      ios_config:
@@ -13,16 +13,16 @@
          - 20 permit icmp host 192.168.20.20 any echo-reply
          - 30 deny icmp any any echo
          - 40 permit ip any any
-                  
-   - name: Apply new ACL to R1 Eth0/0 out
+
+   - name: Apply new ACL to R1 Eth0/0
      ios_config:
-       parents: int e0/0.20
+       parents: interface Eth0/0
        lines:
-         - ip access-group REQ2 out
+         - ip access-group REQ2 in
 
    - name: Check result
      ios_command:
-       commands: sh ip access-lists
+       commands: sh ip access-lists REQ2
      register: result
      tags: show
 
