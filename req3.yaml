@@ -9,14 +9,13 @@
      ios_config:
        parents: ip access-list extended REQ3
        lines:
-         - "10 permit tcp host 192.168.20.20 host 192.168.10.10 eq www"
-         - "20 deny tcp any any eq www"
-         - "30 permit ip any any"
+         - 10 permit tcp host 192.168.20.20 host 192.168.10.10 eq www
+         - 20 deny tcp any any eq www
+         - 30 permit ip any any
 
    - name: Apply new ACL to R1
      ios_config:
-       # Replace 'Eth0/0' with the correct interface name
-       parents: interface Eth0/0.10
+       parents: int e0/0.10
        lines:
          - ip access-group REQ3 in
   
